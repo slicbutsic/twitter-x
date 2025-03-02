@@ -1,0 +1,11 @@
+<%= form_with(model: @post, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :tweet %>
+    <%= form.text_area :tweet %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

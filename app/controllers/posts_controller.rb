@@ -14,9 +14,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to @post
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,8 +27,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params)
-      redirect_to @product
+    if @post.update(post_params)
+      redirect_to @post
     else
       render :edit, status: :unprocessable_entity
     end
