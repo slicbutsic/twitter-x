@@ -1,10 +1,20 @@
 <%= form_with(model: @post, local: true) do |form| %>
-  <div class="mb-4">
-    <%= form.label :tweet, class: "block text-sm font-medium text-gray-700" %>
-    <%= form.text_area :tweet, minlength: 2, maxlength: 140, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation" class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+      <h2 class="font-semibold"><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul class="list-disc list-inside">
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field mt-10 mb-6">
+    <%= form.text_area :tweet, class: "mt-2 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder-center", placeholder: 'What’s on your mind?', required: true, minlength: 2, maxlength: 140 %>
   </div>
 
   <div class="actions">
-    <%= form.submit "Post", class: "w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+    <%= form.submit "Post", class: "w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500" %>
   </div>
 <% end %>
