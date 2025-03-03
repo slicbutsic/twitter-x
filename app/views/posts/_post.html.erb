@@ -1,0 +1,8 @@
+<div class="post" id="post-<%= post.id %>">
+  <div class="text-lg mt-4"><%= post.user.full_name %>:</div>
+  <div class="flex">
+    <%= link_to post_path(post) do %>
+    <div class="text-md text-gray-700"><%= post.tweet %></div>
+  </div>
+  <% end %>
+</div>

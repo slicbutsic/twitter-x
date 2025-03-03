@@ -16,12 +16,23 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  # def create
+  #   @post = current_user.posts.new(post_params)
+  #   if @post.save
+  #     redirect_to root_path
+  #   else
+  #     render :new, status: :unprocessable_entity
+  #   end
+  # end
+  
   def create
     @post = current_user.posts.new(post_params)
-    if @post.save
-      redirect_to root_path
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @post.save
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -1,20 +1,11 @@
-<%= form_with(model: @post, local: true) do |form| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation" class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
-      <h2 class="font-semibold"><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-      <ul class="list-disc list-inside">
-        <% @post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= turbo_frame_tag id='new_post' do %>
+  <%= form_with(model: post) do |form| %> <!-- Aqui você usa o post que foi passado -->
+    <div class="field mt-10 mb-6">
+      <%= form.text_area :tweet, class: "mt-2 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder-center", placeholder: 'What’s on your mind?', required: true, minlength: 2, maxlength: 140 %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Post", class: "w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500" %>
     </div>
   <% end %>
-
-  <div class="field mt-10 mb-6">
-    <%= form.text_area :tweet, class: "mt-2 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder-center", placeholder: 'What’s on your mind?', required: true, minlength: 2, maxlength: 140 %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Post", class: "w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500" %>
-  </div>
 <% end %>
