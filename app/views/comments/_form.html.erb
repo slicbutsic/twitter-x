@@ -1,0 +1,20 @@
+<%= form_with(model: [ @post, @comment ], local: true) do |form| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation" class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+      <h2 class="font-semibold"><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <ul class="list-disc list-inside">
+        <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field mt-10 mb-6">
+    <%= form.text_area :body, class: "mt-2 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder-center", placeholder: 'Add a new comment', required: true, minlength: 2, maxlength: 140 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Post Comment", class: "w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500" %>
+  </div>
+<% end %>
