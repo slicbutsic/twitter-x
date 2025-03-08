@@ -1,29 +1,50 @@
-<h2>Sign up</h2>
+<div class="text-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <h2 class="text-3xl font-semibold mb-4">Sign up</h2>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <!-- First Name field -->
+    <div class="mb-4">
+      <%= f.label :first_name, class: 'text-white' %>
+      <%= f.text_field :first_name, class: 'form-control bg-dark text-white border border-gray-300 rounded-lg shadow-sm w-full py-2 px-4 mt-2', required: true %>
+    </div>
+
+    <!-- Last Name field -->
+    <div class="mb-4">
+      <%= f.label :last_name, class: 'text-white' %>
+      <%= f.text_field :last_name, class: 'form-control bg-dark text-white border border-gray-300 rounded-lg shadow-sm w-full py-2 px-4 mt-2', required: true %>
+    </div>
+
+    <!-- Email field -->
+    <div class="mb-4">
+      <%= f.label :email, class: 'text-white' %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control bg-dark text-white border border-gray-300 rounded-lg shadow-sm w-full py-2 px-4 mt-2', required: true, type: 'email' %>
+    </div>
+
+    <!-- Password field -->
+    <div class="mb-4">
+      <%= f.label :password, class: 'text-white' %>
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: 'form-control bg-dark text-white border border-gray-300 rounded-lg shadow-sm w-full py-2 px-4 mt-2', required: true %>
+    </div>
+
+    <!-- Password Confirmation field -->
+    <div class="mb-4">
+      <%= f.label :password_confirmation, class: 'text-white' %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control bg-dark text-white border border-gray-300 rounded-lg shadow-sm w-full py-2 px-4 mt-2', required: true %>
+    </div>
+
+    <!-- Submit button -->
+    <div class="mt-4">
+      <%= f.submit "Sign up", class: 'w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 cursor-pointer' %>
+    </div>
+  <% end %>
+
+  <div class="mt-4 text-center text-white">
+    <%= render "devise/shared/links" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
