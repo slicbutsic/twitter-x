@@ -1,6 +1,19 @@
 <div class="text-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
-  <!-- User's full name -->
-  <h1 class="text-3xl font-semibold mb-4"><%= @user.full_name %></h1>
+
+ <!-- User's full name and Edit Profile button on the same line -->
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-3xl font-semibold"><%= @user.full_name %></h1>
+    <% if current_user == @user %>
+      <%= link_to 'Edit Profile', edit_user_path, class: 'bg-gray-200 text-black py-1 px-3 text-sm rounded-3xl hover:bg-gray-300 transition duration-300 cursor-pointer' %>
+    <% end %>
+  </div>
+
+  <h3>
+    <!-- Display the bio if it exists -->
+    <% if @user.bio.present? %>
+      <p> <%= @user.bio %></p>
+    <% end %>
+  </h3>
 
   <!-- Followers and Following count -->
   <div class="mb-4 flex space-x-4 items-center">
@@ -12,9 +25,9 @@
   <% if current_user != @user %>
     <div class="mb-6">
       <% if current_user.following?(@user) %>
-        <%= button_to "Unfollow", unfollow_path(@user), method: :delete, class: "bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300" %>
+        <%= button_to "Unfollow", unfollow_path(@user), method: :delete, class: "bg-black border text-white py-1 px-3 text-sm rounded-lg hover:border-red-700 hover:text-red-700 transition duration-300 ml-4" %>
       <% else %>
-        <%= button_to "Follow", follow_path(following_id: @user.id), method: :post, class: "bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300" %>
+        <%= button_to "Follow", follow_path(following_id: @user.id), method: :post, class:  "bg-gray-200 text-black py-1 px-3 text-sm rounded-3xl hover:bg-gray-300 transition duration-300 cursor-pointer ml-4" %>
       <% end %>
     </div>
   <% end %>
