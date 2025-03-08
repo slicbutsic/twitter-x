@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :following, through: :following_relationships, source: :following
 
   # Profile
-  validates :bio, length: { maximum: 30 }, allow_blank: true
+  validates :bio, length: { maximum: 100 }, allow_blank: true
 
   def follow(user)
     following << user unless self == user || following.include?(user)
