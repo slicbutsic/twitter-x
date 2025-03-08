@@ -44,7 +44,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path
+    redirect_to request.referer || posts_path, notice: 'You liked the post'
   end
 
   private
