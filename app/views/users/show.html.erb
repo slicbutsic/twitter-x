@@ -1,0 +1,38 @@
+<h1><%= @user.full_name %></h1>
+
+Followers: <%= @user.followers.count %>
+Following: <%= @user.following.count %>
+
+
+<%# Follow/unfollow button %>
+<% if current_user != @user %>
+  <% if current_user.following?(@user) %>
+    <%= button_to "Unfollow", unfollow_path(@user), method: :delete %>
+  <% else %>
+    <%= button_to "Follow", follow_path(following_id: @user.id), method: :post %>
+  <% end %>
+<% end %>
+
+
+<%# Display user posts with like button %>
+<h2>Posts</h2>
+<% @posts.each do |post| %>
+  <div class="post">
+    <p><%= post.tweet %></p>
+    <p><%= time_ago_in_words(post.created_at) %> ago</p>
+
+    <div class="flex items-center space-x-2 mt-2">
+      <% if current_user.likes.exists?(post: post) %>
+        <% like = current_user.likes.find_by(post: post) %>
+        <%= button_to post_like_path(post, like), method: :delete, class:'cursor-pointer' do %>
+          <%= render 'posts/liked-icon' %>
+        <% end %>
+      <% else %>
+        <%= button_to post_likes_path(post), method: :post, class:'cursor-pointer' do %>
+          <%= render 'posts/like-icon' %>
+        <% end %>
+      <% end %>
+      <span class="text-sm text-gray-500"><%= pluralize(post.likes.count, 'like') %></span>
+    </div>
+  </div>
+<% end %>

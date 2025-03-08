@@ -1,17 +1,20 @@
 <div class="text-lg font-semibold flex items-center">
-  <%= @post.user.full_name %>:
+  <%= link_to user_path(@user) do %>
+    <%= @post.user.full_name %>:
+  <% end %>
 </div>
 
 
 
 
-
-<% # Assuming you want to show the follow button for the user who created the post %>
-<% user = @post.user %>  <!-- Get the user who created the post -->
-<% if current_user.following?(user) %>
-  <%= button_to "Unfollow", unfollow_path(user), method: :delete %>
-<% else %>
-  <%= button_to "Follow", follow_path(following_id: user.id), method: :post %>
+<%# Follow/unfollow button %>
+<% if current_user != @user %>
+  <% user = @post.user %>  <!-- Get the user who created the post -->
+  <% if current_user.following?(user) %>
+    <%= button_to "Unfollow", unfollow_path(user), method: :delete %>
+  <% else %>
+    <%= button_to "Follow", follow_path(following_id: user.id), method: :post %>
+  <% end %>
 <% end %>
 
 
