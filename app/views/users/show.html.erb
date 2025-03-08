@@ -1,38 +1,46 @@
-<h1><%= @user.full_name %></h1>
+<div class="text-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+  <!-- User's full name -->
+  <h1 class="text-3xl font-semibold mb-4"><%= @user.full_name %></h1>
 
-Followers: <%= @user.followers.count %>
-Following: <%= @user.following.count %>
-
-
-<%# Follow/unfollow button %>
-<% if current_user != @user %>
-  <% if current_user.following?(@user) %>
-    <%= button_to "Unfollow", unfollow_path(@user), method: :delete %>
-  <% else %>
-    <%= button_to "Follow", follow_path(following_id: @user.id), method: :post %>
-  <% end %>
-<% end %>
-
-
-<%# Display user posts with like button %>
-<h2>Posts</h2>
-<% @posts.each do |post| %>
-  <div class="post">
-    <p><%= post.tweet %></p>
-    <p><%= time_ago_in_words(post.created_at) %> ago</p>
-
-    <div class="flex items-center space-x-2 mt-2">
-      <% if current_user.likes.exists?(post: post) %>
-        <% like = current_user.likes.find_by(post: post) %>
-        <%= button_to post_like_path(post, like), method: :delete, class:'cursor-pointer' do %>
-          <%= render 'posts/liked-icon' %>
-        <% end %>
-      <% else %>
-        <%= button_to post_likes_path(post), method: :post, class:'cursor-pointer' do %>
-          <%= render 'posts/like-icon' %>
-        <% end %>
-      <% end %>
-      <span class="text-sm text-gray-500"><%= pluralize(post.likes.count, 'like') %></span>
-    </div>
+  <!-- Followers and Following count -->
+  <div class="mb-4">
+    <p class="text-xl">Followers: <%= @user.followers.count %></p>
+    <p class="text-xl">Following: <%= @user.following.count %></p>
   </div>
-<% end %>
+
+  <%# Follow/unfollow button %>
+  <% if current_user != @user %>
+    <div class="mb-6">
+      <% if current_user.following?(@user) %>
+        <%= button_to "Unfollow", unfollow_path(@user), method: :delete, class: "bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300" %>
+      <% else %>
+        <%= button_to "Follow", follow_path(following_id: @user.id), method: :post, class: "bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# Display user posts with like button %>
+  <h2 class="text-2xl font-semibold mb-4">Posts</h2>
+
+  <% @posts.each do |post| %>
+    <div class="border border-gray-600 p-4 rounded-lg mb-6">
+      <p class="text-lg text-white mb-2"><%= post.tweet %></p>
+      <p class="text-sm text-gray-400 mb-4"><%= time_ago_in_words(post.created_at) %> ago</p>
+
+      <!-- Like button -->
+      <div class="flex items-center space-x-2">
+        <% if current_user.likes.exists?(post: post) %>
+          <% like = current_user.likes.find_by(post: post) %>
+          <%= button_to post_like_path(post, like), method: :delete, class:'cursor-pointer text-white' do %>
+            <%= render 'posts/liked-icon' %>
+          <% end %>
+        <% else %>
+          <%= button_to post_likes_path(post), method: :post, class:'cursor-pointer text-white' do %>
+            <%= render 'posts/like-icon' %>
+          <% end %>
+        <% end %>
+        <span class="text-sm text-gray-500"><%= pluralize(post.likes.count, 'like') %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

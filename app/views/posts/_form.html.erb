@@ -1,7 +1,7 @@
 <%= turbo_frame_tag id='new_post' do %>
-  <%= form_with(model: post) do |form| %> <!-- Aqui você usa o post que foi passado -->
+  <%= form_with(model: post) do |form| %>
     <div class="field mt-10 mb-6">
-      <%= form.text_area :tweet, class: "mt-2 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder-center", placeholder: 'What’s on your mind?', required: true, minlength: 2, maxlength: 140 %>
+      <%= form.text_area :tweet, class: "mt-2 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder-white text-white", placeholder: 'What’s on your mind?', required: true, minlength: 2, maxlength: 140 %>
     </div>
 
     <div class="actions">
