@@ -25,7 +25,7 @@
   <% @posts.each do |post| %>
     <div class="border border-gray-600 p-4 rounded-lg mb-6">
       <p class="text-lg text-white mb-2"><%= post.tweet %></p>
-      <p class="text-sm text-gray-400 mb-4"><%= time_ago_in_words(post.created_at) %> ago</p>
+      <p class="text-sm text-white mb-4"><%= time_ago_in_words(post.created_at) %> ago</p>
 
       <!-- Like button -->
       <div class="flex items-center space-x-2">
