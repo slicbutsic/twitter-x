@@ -12,4 +12,8 @@ Rails.application.routes.draw do
     resources :comments
     resources :likes
   end
+
+  # resources :follows, only: [:create, :destroy]
+  post '/follow/:following_id', to: 'follows#create', as: :follow
+  delete '/unfollow/:id', to: 'follows#destroy', as: :unfollow
 end

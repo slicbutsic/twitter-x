@@ -10,6 +10,8 @@ class PostsController < ApplicationController
     @comments = @post.comments.all
     @comment = @post.comments.new
     @likes = Like.all
+
+    @user = @post.user 
   end
 
   def new
@@ -24,7 +26,7 @@ class PostsController < ApplicationController
   #     render :new, status: :unprocessable_entity
   #   end
   # end
-  
+
   def create
     @post = current_user.posts.new(post_params)
     respond_to do |format|
