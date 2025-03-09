@@ -1,0 +1,16 @@
+<div class="w-5 ml-2 lg:ml-15 md:ml-15 sm:ml-15">
+  <%= link_to user_path(@user) do %>
+    <%= render 'shared/icons/back' %>
+  <% end %>
+</div>
+
+<div class='text-white flex justify-center items-center flex-col space-y-10 mt-5 text-lg'>
+  <h1><%= @user.full_name %> is Following</h1>
+  <ul class='space-y-4 text-lg'>
+    <% @following.each do |followed| %>
+      <%= link_to user_path(followed), class:'hover:underline flex items-center' do %>
+        <li><%= followed.full_name %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
