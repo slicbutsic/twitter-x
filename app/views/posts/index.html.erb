@@ -5,9 +5,11 @@
 
   <div id="posts" class="mt-4">
     <% @posts.each do |post| %>
-      <div class="border border-gray-600 text-white rounded-lg p-4 mb-4">
-        <%= render 'post', post: post %>
-      </div>
+      <%= link_to post_path(post) do %>
+        <div class="border border-gray-600 text-white rounded-lg p-4 mb-4">
+          <%= render 'post', post: post %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
