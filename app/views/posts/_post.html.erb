@@ -1,5 +1,9 @@
 <div class="post" id="post-<%= post.id %>">
-  <div class="text-lg mt-4"><%= post.user.full_name %></div>
+  <div class="text-lg flex items-center">
+    <%= post.user.full_name %>
+    <span class="mx-2 text-white">•</span> <!-- Black dot with margin -->
+    <p class="text-[15px] text-white"><%= time_ago_in_words(post.created_at).capitalize %> ago</p>
+  </div>
   <div class="flex">
     <div class="text-md text-white"><%= post.tweet %></div>
   </div>
