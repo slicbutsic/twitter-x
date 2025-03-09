@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     # @user is already set by before_action
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc)
     @likes = Like.all
     @followers = Follow.all
     @followings = Follow.all
