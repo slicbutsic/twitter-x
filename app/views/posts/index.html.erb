@@ -3,6 +3,8 @@
     <%= turbo_frame_tag id='new_post', src:new_post_path %>
   </div>
 
+
+
   <div id="posts" class="mt-4">
     <% @posts.each do |post| %>
       <%= link_to post_path(post) do %>
@@ -12,4 +14,6 @@
       <% end %>
     <% end %>
   </div>
+   <%= paginate @posts, remote: true, class: 'flex justify-center mt-4 space-x-2' %>
+
 </div>
